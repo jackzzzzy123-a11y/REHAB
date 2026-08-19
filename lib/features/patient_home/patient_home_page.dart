@@ -74,9 +74,9 @@ class PatientHomePage extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           OutlinedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.folder_open_outlined),
-            label: Text(l10n.viewRecords),
+            onPressed: () => context.go('/patient/upload'),
+            icon: const Icon(Icons.upload_file_outlined),
+            label: const Text('上傳媒體'),
           ),
         ],
       ),

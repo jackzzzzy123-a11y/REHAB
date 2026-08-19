@@ -56,4 +56,7 @@ class RehabRepository {
   // ---- 刪除 / 保留 ----
   Future<void> softDeletePatient(String id) => deletion.softDeletePatient(id);
   Future<void> purgePatient(String id) => deletion.purgePatient(id);
+
+  // ---- 媒體（患者端上傳，P2-d：存前已模糊 + 加密）----
+  Future<void> saveMedia(MediaAsset asset) => storage.saveMedia(asset);
 }

@@ -17,6 +17,7 @@ import '../../features/import/import_page.dart';
 import '../../features/patient_dashboard/dashboard_page.dart';
 import '../../features/patient_dashboard/patient_detail_page.dart';
 import '../../features/patient_home/patient_home_page.dart';
+import '../../features/patient_upload/patient_upload_page.dart';
 import '../../features/settings/settings_page.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -87,6 +88,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/patient/communication',
         builder: (context, state) => const CommunicationPage(),
+      ),
+      // 患者端上傳（P2-d）：PII 同意 + 媒體選取 + 模糊標記存庫。
+      GoRoute(
+        path: '/patient/upload',
+        builder: (context, state) => const PatientUploadPage(),
       ),
     ],
   );
