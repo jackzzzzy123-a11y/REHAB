@@ -10,8 +10,8 @@ dependencies:
   crypto: ^3.0.5                   # 低階雜湊（完整性校驗）
   dio: ^5.7.0                      # 網路（含攔截器 / 重試 / 超時 / 證書綁定）
   encrypt: ^5.0.3                  # AES-GCM 靜態加密（at rest）
-  file_picker: ^10.3.10             # 檔案匯入（選檔）；10.3.3+ compileSdk 跟隨 flutter 默認，10.3.9+ 支援 Gradle 9
   ffmpeg_wasm: ^1.0.1              # Web 端影片剪輯引擎（瀏覽器內 ffmpeg.wasm，裁剪+壓縮）
+  file_picker: ^10.3.10             # 檔案匯入（選檔）；10.3.3+ compileSdk 跟隨 flutter 默認，10.3.9+ 支援 Gradle 9
   fl_chart: ^0.68.0                # 數據可視化（折線/柱狀）
   flutter:
     sdk: flutter
