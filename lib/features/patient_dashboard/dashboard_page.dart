@@ -64,6 +64,11 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
             ),
           ],
           IconButton(
+            icon: const Icon(Icons.chat_outlined),
+            tooltip: l10n.contactDoctor,
+            onPressed: () => context.go('/doctor/communication'),
+          ),
+          IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: l10n.settings,
             onPressed: () => context.go('/settings'),

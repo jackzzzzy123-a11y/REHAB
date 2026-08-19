@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/auth_page.dart';
 import '../../features/auth/domain/user_role.dart';
 import '../../features/auth/providers/auth_provider.dart';
+import '../../features/communication/communication_page.dart';
 import '../../features/import/import_page.dart';
 import '../../features/patient_dashboard/dashboard_page.dart';
 import '../../features/patient_dashboard/patient_detail_page.dart';
@@ -77,6 +78,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/patient',
         builder: (context, state) => const PatientHomePage(),
+      ),
+      // 醫患溝通（P2-c）：醫生 / 患者雙入口，頁內依角色區分「我 / 對方」。
+      GoRoute(
+        path: '/doctor/communication',
+        builder: (context, state) => const CommunicationPage(),
+      ),
+      GoRoute(
+        path: '/patient/communication',
+        builder: (context, state) => const CommunicationPage(),
       ),
     ],
   );

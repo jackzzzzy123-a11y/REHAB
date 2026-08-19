@@ -68,7 +68,7 @@ class PatientHomePage extends ConsumerWidget {
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
-            onPressed: () {},
+            onPressed: () => context.go('/patient/communication'),
             icon: const Icon(Icons.chat_outlined),
             label: Text(l10n.contactDoctor),
           ),
