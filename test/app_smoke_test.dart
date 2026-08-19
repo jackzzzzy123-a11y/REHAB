@@ -18,6 +18,13 @@ void main() {
 
   testWidgets('設定頁渲染 外觀/長者/安全鎖 三段', (tester) async {
     const locale = Locale('zh', 'HK');
+    // SettingsPage 的 ListView 内容较长（外觀/長者/專家年齡/安全鎖/逾時），
+    // 默认测试视口 800×600 会把末尾的逾時 SegmentedButton 裁出视口外——
+    // ListView 懒加载不 mount 视口外的 child，导致 find.text(lockTimeoutMin3) 找不到。
+    // 放大视口确保整页渲染（MEMORY 测试约定：超出默认视口须显式设 physicalSize）。
+    tester.view.physicalSize = const Size(800, 1400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
