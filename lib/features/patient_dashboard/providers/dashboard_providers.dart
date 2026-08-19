@@ -73,3 +73,8 @@ final demoSeedNotifierProvider =
 
 /// 患者清單搜尋關鍵字（自 dashboard 遷入，供 UI 狀態與元件解耦）。
 final patientQueryProvider = StateProvider<String>((ref) => '');
+
+/// 當前選中患者的年齡（患者端長者模式觸發，見 p1_spec §11）。
+/// 由 dashboard 選中患者時寫入（讀 PatientProfile.dateOfBirth 算齡）；
+/// null = 未選中 / 未知。
+final selectedPatientAgeProvider = StateProvider<int?>((ref) => null);

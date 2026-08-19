@@ -26,6 +26,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   String? _selectedId;
 
   Future<void> _logout() async {
+    ref.read(selectedPatientAgeProvider.notifier).state = null;
     await ref.read(authNotifierProvider.notifier).logout();
     if (mounted) context.go('/login');
   }
@@ -181,7 +182,12 @@ class _PatientList extends ConsumerWidget {
                         '${l10n.bedNo}：${p.patientId} · ${p.rehabStage}',
                       ),
                       trailing: const Icon(Icons.chevron_right),
-                      onTap: () => onTap(p.patientId),
+                      onTap: () {
+                        // 患者端長者模式：選中即按出生年月算齡，滿 65 自動套用。
+                        ref.read(selectedPatientAgeProvider.notifier).state =
+                            ageFromDob(p.dateOfBirth);
+                        onTap(p.patientId);
+                      },
                     );
                   },
                 ),

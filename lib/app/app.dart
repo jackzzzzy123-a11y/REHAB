@@ -13,6 +13,7 @@ import 'package:rehab_med/l10n/generated/app_localizations.dart';
 
 import '../features/auth/domain/user_role.dart';
 import '../features/auth/providers/auth_provider.dart';
+import '../features/patient_dashboard/providers/dashboard_providers.dart';
 import 'localization/l10n.dart';
 import 'router/app_router.dart';
 import 'security/lock_providers.dart';
@@ -59,9 +60,11 @@ class _RehabMedAppState extends ConsumerState<RehabMedApp>
   Widget build(BuildContext context) {
     final router = ref.watch(appRouterProvider);
     final themeMode = ref.watch(themeModeProvider);
-    // #10 長者模式：自動 + 手動 + 可調
+    // #10 長者模式：自動 + 手動 + 可調（系統大字 / 患者端年齡 / 專家端年齡）
     final elder = effectiveElder(
       override: ref.watch(elderOverrideProvider),
+      age: ref.watch(selectedPatientAgeProvider),
+      expertAge: ref.watch(expertAgeProvider),
     );
     final contrast = ref.watch(elderContrastProvider);
     final scale = ref.watch(elderScaleProvider);

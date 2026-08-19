@@ -94,6 +94,28 @@ class SettingsPage extends ConsumerWidget {
                 ),
               ),
             ),
+          // 專家端長者模式：年滿 65 自動套用（p1_spec §11 專家端語義）
+          ListTile(
+            leading: const Icon(Icons.cake_outlined),
+            title: const Text('專家年齡'),
+            subtitle: const Text('年滿 65 自動開啟長者模式'),
+            trailing: SizedBox(
+              width: 80,
+              child: TextFormField(
+                initialValue: (ref.watch(expertAgeProvider) ?? '').toString(),
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                decoration: const InputDecoration(
+                  isDense: true,
+                  suffixText: '歲',
+                ),
+                onChanged: (v) {
+                  final n = int.tryParse(v.trim());
+                  ref.read(expertAgeProvider.notifier).state = n;
+                },
+              ),
+            ),
+          ),
           if (elder) ...[
             ListTile(
               leading: const Icon(Icons.format_size),

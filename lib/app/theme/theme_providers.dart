@@ -26,6 +26,9 @@ final elderContrastProvider = StateProvider<bool>((ref) => false);
 /// 簡化導航（隱藏次要入口，僅保留核心操作）。
 final elderSimplifyProvider = StateProvider<bool>((ref) => false);
 
+/// 專家本人年齡（專家端長者模式觸發，見 p1_spec §11）。null = 未設定。
+final expertAgeProvider = StateProvider<int?>((ref) => null);
+
 /// 依系統字體縮放判斷「自動長者」：比例 ≥1.3 視為長者偏好。
 /// 用 platformDispatcher（context-free）：在 App 根（MaterialApp 之上）也能讀，
 /// 且不會讀到 App 自身已套用的縮放（避免回授讓開關卡死）。
@@ -34,5 +37,25 @@ bool autoElderFromSystem() {
   return factor >= 1.3;
 }
 
-/// 生效中的長者模式：手動覆蓋 > 系統自動。純函式，易於測試。
-bool effectiveElder({bool? override}) => override ?? autoElderFromSystem();
+/// 由出生年月計算年齡（滿歲）。
+int ageFromDob(DateTime dob) {
+  final now = DateTime.now();
+  var age = now.year - dob.year;
+  if (now.month < dob.month || (now.month == dob.month && now.day < dob.day)) {
+    age--;
+  }
+  return age;
+}
+
+/// 依年齡判斷「長者」：年滿 65（p1_spec §11 兩端語義一致的下限）。
+bool autoElderFromAge(int? age) => age != null && age >= 65;
+
+/// 純年齡版生效長者模式（不依賴 WidgetsBinding，易於單測）：
+/// 手動覆蓋 > 患者端年齡(age) > 專家端年齡(expertAge)。
+bool effectiveElderFromAge({bool? override, int? age, int? expertAge}) =>
+    override ?? (autoElderFromAge(age) || autoElderFromAge(expertAge));
+
+/// 生效中的長者模式（App 使用）：手動覆蓋 > 系統大字 / 年齡自動。純函式。
+bool effectiveElder({bool? override, int? age, int? expertAge}) =>
+    effectiveElderFromAge(override: override, age: age, expertAge: expertAge) ||
+    autoElderFromSystem();
