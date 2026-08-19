@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:rehab_med/l10n/generated/app_localizations.dart';
 
 import '../../../data/models/media_asset.dart';
+import 'video_play_launcher.dart';
 
 String _fmt(DateTime d) => '${d.year}-${d.month}-${d.day}';
 
@@ -43,7 +44,7 @@ class MediaTab extends StatelessWidget {
   }
 }
 
-/// 合規說明條：媒體已於儲存前模糊背景 + 面部（PDPO / media_blur）。
+/// 合規說明條：影像存前模糊（PDPO / media_blur）；影片已獲同意保存（模糊暫緩）。
 class _ComplianceNote extends StatelessWidget {
   const _ComplianceNote();
 
@@ -67,8 +68,9 @@ class _ComplianceNote extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '輔助媒體已於儲存前模糊背景與面部，本機不留存原始可辨識影像'
-              '（PDPO 第4原則 / media_blur）。',
+              '影像已於儲存前模糊背景與面部（media_blur）；'
+              '影片已獲患者同意保存，用於康復記錄用途。'
+              '本機靜態存放（PDPO 第4原則）。',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
@@ -79,6 +81,7 @@ class _ComplianceNote extends StatelessWidget {
 }
 
 /// 單筆媒體卡：模糊縮圖占位 + 元資訊 + 模糊狀態徽標。
+/// 影片（移動端本地檔案）可點擊播放。
 class _MediaCard extends StatelessWidget {
   const _MediaCard({required this.media});
   final MediaAsset media;
@@ -88,7 +91,7 @@ class _MediaCard extends StatelessWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final isVideo = media.kind == MediaKind.video;
-    return Card(
+    final card = Card(
       margin: const EdgeInsets.only(bottom: 12),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -120,7 +123,7 @@ class _MediaCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      isVideo ? '影片 · 已模糊' : '影像 · 已模糊',
+                      isVideo ? '影片' : '影像 · 已模糊',
                       style: theme.textTheme.labelMedium,
                     ),
                   ],
@@ -143,8 +146,13 @@ class _MediaCard extends StatelessWidget {
                 Wrap(
                   spacing: 8,
                   children: [
-                    _BlurBadge(label: '背景已模糊', on: media.backgroundBlurred),
+                    _BlurBadge(
+                      label: '背景已模糊',
+                      on: media.backgroundBlurred,
+                    ),
                     _BlurBadge(label: '面部已模糊', on: media.faceBlurred),
+                    if (isVideo)
+                      _PlayBadge(on: _canPlay(media)),
                   ],
                 ),
               ],
@@ -152,6 +160,42 @@ class _MediaCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+    if (!isVideo || !_canPlay(media)) return card;
+    return InkWell(
+      onTap: () => playVideoAsset(context, media),
+      child: card,
+    );
+  }
+
+  /// 可播放判定：移動端本地檔案（非 web_download 標記）。
+  static bool _canPlay(MediaAsset media) {
+    final path = media.storagePath;
+    return media.kind == MediaKind.video &&
+        path.isNotEmpty &&
+        !path.startsWith('web_download');
+  }
+}
+
+/// 可播放徽標：主色 = 點擊播放；錯誤色 = 無法於 App 內播放。
+class _PlayBadge extends StatelessWidget {
+  const _PlayBadge({required this.on});
+  final bool on;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final color = on ? scheme.primary : scheme.error;
+    final bg = on ? scheme.primaryContainer : scheme.errorContainer;
+    return Chip(
+      visualDensity: VisualDensity.compact,
+      avatar: Icon(
+        on ? Icons.play_circle_outline : Icons.download_done_outlined,
+        size: 16,
+        color: color,
+      ),
+      label: Text(on ? '點擊播放' : '已下載到本機'),
+      backgroundColor: bg.withValues(alpha: 0.25),
     );
   }
 }

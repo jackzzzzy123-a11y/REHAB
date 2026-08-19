@@ -6,6 +6,7 @@
 import '../../core/storage/audit_store.dart';
 import '../../core/storage/deletion_service.dart';
 import '../../core/storage/local_storage_service.dart';
+import '../../core/storage/media_file_store.dart';
 import '../../data/models/audit_entry.dart';
 import '../../data/models/import_batch.dart';
 import '../../data/models/media_asset.dart';
@@ -59,4 +60,19 @@ class RehabRepository {
 
   // ---- 媒體（患者端上傳，P2-d：存前已模糊 + 加密）----
   Future<void> saveMedia(MediaAsset asset) => storage.saveMedia(asset);
+
+  /// 持久化媒體檔案（剪輯後影片）到媒體目錄，回傳 storagePath。
+  ///
+  /// Web 端不支援（無檔案系統），回傳 null（上層以下載標記記錄）。
+  Future<String?> persistMediaFile({
+    required String patientId,
+    required String fileName,
+    required String sourcePath,
+  }) {
+    return createMediaFileStore().persist(
+      patientId: patientId,
+      fileName: fileName,
+      sourcePath: sourcePath,
+    );
+  }
 }

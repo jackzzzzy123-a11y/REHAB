@@ -11,6 +11,7 @@ dependencies:
   dio: ^5.7.0                      # 網路（含攔截器 / 重試 / 超時 / 證書綁定）
   encrypt: ^5.0.3                  # AES-GCM 靜態加密（at rest）
   file_picker: ^10.3.10             # 檔案匯入（選檔）；10.3.3+ compileSdk 跟隨 flutter 默認，10.3.9+ 支援 Gradle 9
+  ffmpeg_wasm: ^1.0.1              # Web 端影片剪輯引擎（瀏覽器內 ffmpeg.wasm，裁剪+壓縮）
   fl_chart: ^0.68.0                # 數據可視化（折線/柱狀）
   flutter:
     sdk: flutter
@@ -29,8 +30,11 @@ dependencies:
   json_annotation: ^4.9.0
   local_auth: ^2.3.0               # 生物辨識閘門
   logger: ^2.4.0                   # 結構化日誌（prod 禁用 print）
+  path_provider: ^2.1.4            # 檔案系統目錄（影片/媒體落盤，P3）
   sentry_flutter: ^9.0.0           # 崩潰 / 錯誤上報（事故通報）；9.x 修復 Kotlin 2.3 構建相容
   shared_preferences: ^2.3.2       # 非敏感設定：語言、字體大小、主題
+  video_player: ^2.9.2             # 影片播放（剪輯預覽 / 專家端查看，P3）
+  video_trimmer: ^5.0.0            # 移動端影片剪輯（Android=MP4Composer / iOS=AVFoundation）
 
 dev_dependencies:
   build_runner: ^2.4.11            # 代碼生成
