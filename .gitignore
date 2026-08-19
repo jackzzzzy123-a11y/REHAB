@@ -1,0 +1,87 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# 機器專屬 / 自動生成（含本機 SDK 絕對路徑，禁止提交）
+/android/local.properties
+**/build/
+**/.gradle/
+.gradle/
+
+# iOS / macOS 生成物
+**/Pods/
+**/xcuserdata/
+**/.symlinks/
+**/DerivedData/
+*.mode1v3
+*.mode2v3
+*.pbxuser
+*.perspectivev3
+
+# Node 自動化依賴（webverify 驗證腳本用，重裝即可）
+webverify/node_modules/
+webverify/cft/
+webverify/profile-*/
+webverify/*.png
+
+# 開發期診斷日誌（本會話產生的 build/analyze/drive 輸出，非源碼）
+*.log
+analyze*.txt
+build_*.txt
+build_apk*.txt
+buildrunner*.txt
+drive_edge*.txt
+dart_*.txt
+test_*.txt
+itest_*.txt
+pstest.txt
+pubget*.txt
+pub_upgrade.txt
+genl10n*.txt
+devices.txt
+diag*.txt
+flog*.txt
+fix_out.txt
+create_out.txt

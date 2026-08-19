@@ -1,0 +1,31 @@
+# 分析規則：基於 very_good_analysis，並加強專案自訂規則。
+# 目標：以「最穩妥」為前提，把潛在錯誤擋在編譯/提交前。
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/l10n/generated/**"
+    - "build/**"
+  errors:
+    invalid_annotation_target: ignore
+    # 敏感資料不得經由日誌外洩；統一使用 core/utils/logger 的 appLogger
+    avoid_print: warning
+
+linter:
+  rules:
+    # 骨架階段先關閉：目前多為占位成員 / 預期中的 TODO，
+    # 待真實公開 API 定型後再開啟。
+    public_member_api_docs: false
+    flutter_style_todos: false
+    prefer_const_constructors: true
+    sort_pub_dependencies: true
+    directives_ordering: true
+    # feature-first 結構以 lib 內相對匯入為主，關閉此 lint 避免噪音。
+    always_use_package_imports: false
+
+# Riverpod 專屬 lint（riverpod_lint）
+custom_lint:
+  rules:
+    - riverpod_lint

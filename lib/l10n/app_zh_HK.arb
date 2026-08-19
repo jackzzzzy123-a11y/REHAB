@@ -1,0 +1,286 @@
+{
+  "@@locale": "zh_HK",
+  "appTitle": "康復醫療",
+  "@appTitle": {
+    "description": "應用標題"
+  },
+  "login": "登入",
+  "@login": {
+    "description": "登入按鈕 / 頁面標題"
+  },
+  "patientDashboard": "患者總覽",
+  "@patientDashboard": {
+    "description": "患者總覽頁面標題"
+  },
+  "ehrDetail": "電子檔案",
+  "@ehrDetail": {
+    "description": "電子檔案詳情頁面標題"
+  },
+  "dataViz": "數據趨勢",
+  "@dataViz": {
+    "description": "數據可視化頁面標題"
+  },
+  "communication": "醫患溝通",
+  "@communication": {
+    "description": "醫患溝通頁面標題"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "設定頁面標題"
+  },
+  "onlyForReference": "僅供參考，不替代醫生診症",
+  "@onlyForReference": {
+    "description": "輔助工具免責聲明"
+  },
+  "selectRole": "選擇身份",
+  "@selectRole": {
+    "description": "登入頁角色選擇提示"
+  },
+  "roleDoctor": "醫生",
+  "@roleDoctor": {
+    "description": "角色：醫生"
+  },
+  "rolePatient": "患者 / 家屬",
+  "@rolePatient": {
+    "description": "角色：患者或家屬"
+  },
+  "username": "帳號",
+  "@username": {
+    "description": "帳號欄位標籤"
+  },
+  "password": "密碼",
+  "@password": {
+    "description": "密碼欄位標籤"
+  },
+  "biometricLogin": "使用生物辨識登入",
+  "@biometricLogin": {
+    "description": "生物辨識登入按鈕"
+  },
+  "consentText": "我已閱讀並同意《個人資料收集聲明》（依據香港《個人資料（私隱）條例》）",
+  "@consentText": {
+    "description": "PDPO 個人資料收集同意聲明"
+  },
+  "consentRequired": "請先同意個人資料收集聲明",
+  "@consentRequired": {
+    "description": "未勾選同意書的提示"
+  },
+  "patientHomeTitle": "我的康復",
+  "@patientHomeTitle": {
+    "description": "患者首頁標題"
+  },
+  "searchPatients": "搜尋 姓名 / 床號 / 康復階段",
+  "@searchPatients": {
+    "description": "患者搜尋框提示"
+  },
+  "noPatients": "暫無患者資料",
+  "@noPatients": {
+    "description": "空清單提示"
+  },
+  "logout": "登出",
+  "@logout": {
+    "description": "登出按鈕"
+  },
+  "myStage": "康復階段",
+  "@myStage": {
+    "description": "患者本人康復階段"
+  },
+  "nextAppointment": "下次覆診",
+  "@nextAppointment": {
+    "description": "下次覆診時間"
+  },
+  "myProgress": "康復進度",
+  "@myProgress": {
+    "description": "康復進度"
+  },
+  "contactDoctor": "聯絡醫生",
+  "@contactDoctor": {
+    "description": "聯絡醫生按鈕"
+  },
+  "viewRecords": "查看我的紀錄",
+  "@viewRecords": {
+    "description": "查看本人紀錄按鈕"
+  },
+  "detailPlaceholder": "個案詳情（開發中）",
+  "@detailPlaceholder": {
+    "description": "詳情頁佔位提示"
+  },
+  "bedNo": "床號",
+  "@bedNo": {
+    "description": "床號標籤"
+  },
+  "importTitle": "匯入康復資料",
+  "@importTitle": {
+    "description": "匯入頁標題"
+  },
+  "importEntry": "匯入資料",
+  "@importEntry": {
+    "description": "總覽頁匯入按鈕"
+  },
+  "pickFile": "選擇檔案",
+  "@pickFile": {
+    "description": "匯入選檔按鈕"
+  },
+  "importHint": "支援 JSON / CSV 格式的已分析康復資料檔",
+  "@importHint": {
+    "description": "匯入頁格式提示"
+  },
+  "importing": "匯入中…",
+  "@importing": {
+    "description": "匯入進行中"
+  },
+  "stepSelectFile": "選擇檔案",
+  "@stepSelectFile": {
+    "description": "步驟：選擇檔案"
+  },
+  "stepParse": "解析內容",
+  "@stepParse": {
+    "description": "步驟：解析"
+  },
+  "stepValidate": "驗證資料",
+  "@stepValidate": {
+    "description": "步驟：驗證"
+  },
+  "stepSave": "存入本地",
+  "@stepSave": {
+    "description": "步驟：存入本地"
+  },
+  "importSuccess": "匯入成功",
+  "@importSuccess": {
+    "description": "匯入成功標題"
+  },
+  "importPatient": "患者：{name}",
+  "@importPatient": {
+    "description": "匯入成功顯示患者名稱",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importRecordCount": "已匯入 {count} 筆康復資料",
+  "@importRecordCount": {
+    "description": "匯入成功筆數",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "importFailed": "匯入失敗",
+  "@importFailed": {
+    "description": "匯入失敗標題"
+  },
+  "retry": "重試",
+  "@retry": {
+    "description": "重試按鈕"
+  },
+  "backToOverview": "返回總覽",
+  "@backToOverview": {
+    "description": "匯入完成返回總覽"
+  },
+  "analyticsNoData": "暫無資料",
+  "@analyticsNoData": { "description": "分析面板空資料提示" },
+  "degradeNote": "未提供概覽摘要，顯示最近批次指標",
+  "@degradeNote": { "description": "無 summary 時的降級提示" },
+  "completionRateLabel": "運動完成率",
+  "@completionRateLabel": { "description": "概覽完成率標籤" },
+  "riskLabel": "風險",
+  "@riskLabel": { "description": "風險等級標籤" },
+  "trendTitle": "趨勢",
+  "@trendTitle": { "description": "縱向趨勢標題" },
+  "trendUp": "改善",
+  "@trendUp": { "description": "趨勢上升" },
+  "trendDown": "退步",
+  "@trendDown": { "description": "趨勢下降" },
+  "trendFlat": "持平",
+  "@trendFlat": { "description": "趨勢持平" },
+  "noteLabel": "備註",
+  "@noteLabel": { "description": "概覽備註標籤" },
+  "analyticsNoSummaryHint": "本 App 不自行計算指標，僅視覺化外部分析結果",
+  "@analyticsNoSummaryHint": { "description": "不計算原則提示" },
+  "distributionTitle": "運動分布",
+  "@distributionTitle": { "description": "分布柱圖標題" },
+  "historyTitle": "歷次測試",
+  "@historyTitle": { "description": "歷次測試標題" },
+  "mediaTitle": "輔助媒體",
+  "@mediaTitle": { "description": "輔助媒體標題" },
+  "analyticsNoTrend": "暫無可繪製的趨勢指標",
+  "@analyticsNoTrend": { "description": "無趨勢指標提示" },
+  "selectMetric": "選擇指標",
+  "@selectMetric": { "description": "趨勢指標選擇提示" },
+  "radarTitle": "能力雷達",
+  "@radarTitle": { "description": "雷達圖標題" },
+  "batchLabel": "批次",
+  "@batchLabel": { "description": "批次標籤" },
+  "testDateLabel": "評估日期",
+  "@testDateLabel": { "description": "評估日期標籤" },
+  "metricsCount": "指標數",
+  "@metricsCount": { "description": "指標數量標籤" },
+  "compareTitle": "批次對比",
+  "@compareTitle": { "description": "批次對比標題" },
+  "metricLabel": "指標",
+  "@metricLabel": { "description": "指標名稱欄" },
+  "deltaLabel": "變化",
+  "@deltaLabel": { "description": "對比變化欄" },
+  "latestBadge": "最近",
+  "@latestBadge": { "description": "最近批次徽章" },
+  "noCompareData": "無可比對資料",
+  "@noCompareData": { "description": "無對比資料提示" },
+  "noMedia": "暫無輔助媒體（P2 填充）",
+  "@noMedia": { "description": "媒體樁提示" },
+  "seedOrImportHint": "請匯入已分析檔案，或載入內置範例資料以預覽看板",
+  "@seedOrImportHint": { "description": "空清單引導" },
+  "loadDemo": "載入範例",
+  "@loadDemo": { "description": "載入 demo 種子按鈕" },
+  "themeTitle": "主題",
+  "@themeTitle": { "description": "設定頁主題區標題" },
+  "themeSubtitle": "明暗模式",
+  "@themeSubtitle": { "description": "設定頁主題區副標題" },
+  "themeModeLight": "淺色",
+  "@themeModeLight": { "description": "主題模式：淺色" },
+  "themeModeDark": "深色",
+  "@themeModeDark": { "description": "主題模式：深色" },
+  "themeModeSystem": "跟隨系統",
+  "@themeModeSystem": { "description": "主題模式：跟隨系統" },
+  "elderTitle": "長者模式",
+  "@elderTitle": { "description": "設定頁長者模式標題" },
+  "elderSubtitle": "自動 + 手動 + 可調",
+  "@elderSubtitle": { "description": "長者模式副標題" },
+  "elderAutoHint": "自動：系統字體較大時開啟（滿 65 歲規則 P2 接 PII）",
+  "@elderAutoHint": { "description": "長者模式自動判斷說明" },
+  "elderResetAuto": "重設為自動",
+  "@elderResetAuto": { "description": "長者模式重設按鈕" },
+  "elderScaleLabel": "字號倍率",
+  "@elderScaleLabel": { "description": "字號倍率滑桿標籤" },
+  "elderContrastLabel": "高對比",
+  "@elderContrastLabel": { "description": "高對比開關" },
+  "elderSimplifyLabel": "簡化導航",
+  "@elderSimplifyLabel": { "description": "簡化導航開關" },
+  "lockTitle": "安全鎖",
+  "@lockTitle": { "description": "設定頁安全鎖標題" },
+  "lockSubtitle": "前台切回 / 超時後重驗（生物辨識）",
+  "@lockSubtitle": { "description": "安全鎖副標題" },
+  "lockEnableLabel": "啟用安全鎖",
+  "@lockEnableLabel": { "description": "啟用安全鎖開關" },
+  "lockTimeoutLabel": "鎖定逾時",
+  "@lockTimeoutLabel": { "description": "鎖定逾時標籤" },
+  "lockTimeoutMin1": "1 分鐘",
+  "@lockTimeoutMin1": { "description": "鎖定逾時：1 分鐘" },
+  "lockTimeoutMin3": "3 分鐘",
+  "@lockTimeoutMin3": { "description": "鎖定逾時：3 分鐘" },
+  "lockTimeoutMin5": "5 分鐘",
+  "@lockTimeoutMin5": { "description": "鎖定逾時：5 分鐘" },
+  "lockTimeoutMin10": "10 分鐘",
+  "@lockTimeoutMin10": { "description": "鎖定逾時：10 分鐘" },
+  "lockScreenTitle": "應用已鎖定",
+  "@lockScreenTitle": { "description": "鎖屏標題" },
+  "lockScreenHint": "驗證身份以繼續",
+  "@lockScreenHint": { "description": "鎖屏提示" },
+  "unlockButton": "解鎖",
+  "@unlockButton": { "description": "解鎖按鈕" },
+  "unlockPasswordLabel": "密碼",
+  "@unlockPasswordLabel": { "description": "解鎖密碼欄位標籤" },
+  "unlockPasswordHint": "生物辨識不可用，輸入密碼（至少 6 位）",
+  "@unlockPasswordHint": { "description": "解鎖密碼兜底提示" }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RehabMed · P1 進度看板</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#171e2e; --panel2:#1d2637; --line:#26324a;
+    --txt:#e6ecf7; --muted:#93a3bd; --ok:#3ecf8e; --warn:#f5b544; --info:#5aa7ff;
+    --doc:#0B6E99; --pat:#2E7D5B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--txt); font-family:"PingFang TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif; line-height:1.55; padding:32px 20px 60px;}
+  .wrap{max-width:960px; margin:0 auto;}
+  h1{font-size:26px; letter-spacing:.5px;}
+  .sub{color:var(--muted); margin-top:4px; font-size:14px;}
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin:20px 0 8px;}
+  .badge{padding:8px 14px; border-radius:999px; font-size:13px; font-weight:600; background:var(--panel); border:1px solid var(--line);}
+  .badge.ok{border-color:var(--ok); color:var(--ok);}
+  .badge.warn{border-color:var(--warn); color:var(--warn);}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin-top:20px;}
+  .card h2{font-size:16px; margin-bottom:14px; color:var(--info); letter-spacing:.3px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--muted); font-weight:600; white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  .dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px;}
+  .dot.done{background:var(--ok);}
+  .dot.pending{background:var(--warn);}
+  .dot.info{background:var(--info);}
+  .pill{display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; font-weight:600;}
+  .pill.done{background:rgba(62,207,142,.14); color:var(--ok);}
+  .pill.warn{background:rgba(245,181,68,.14); color:var(--warn);}
+  .pill.info{background:rgba(90,167,255,.14); color:var(--info);}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; color:var(--muted); font-size:12.5px; margin-top:10px;}
+  .gauge-wrap{margin-top:6px;}
+  .gauge{height:14px; background:var(--panel2); border-radius:999px; overflow:hidden; border:1px solid var(--line);}
+  .gauge>span{display:block; height:100%; background:linear-gradient(90deg,var(--ok),#57e3a5); width:100%;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+  .kv{font-size:13.5px;}
+  .kv b{color:var(--txt);}
+  .kv div{margin-bottom:8px;}
+  .muted{color:var(--muted);}
+  .tag-doc{color:var(--doc);} .tag-pat{color:#5fd0a8;}
+  footer{margin-top:26px; color:var(--muted); font-size:12px; text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏥 RehabMed 康復醫療 App · P1 進度看板</h1>
+  <div class="sub">香港市場醫生 / 康復治療師合規輔助工具 · 純本地離線 Demo · 資料驅動儀表板</div>
+
+  <div class="badges">
+    <span class="badge ok">✔ flutter analyze：0 issues</span>
+    <span class="badge ok">✔ flutter test：22 / 22 通過</span>
+    <span class="badge ok">✔ flutter build web：通過</span>
+    <span class="badge ok">✔ flutter build apk：58.4MB</span>
+    <span class="badge ok">✔ 任務完成 31 / 31</span>
+  </div>
+
+  <div class="card">
+    <h2>📊 整體進度</h2>
+    <div class="gauge-wrap"><div class="gauge"><span></span></div></div>
+    <div class="legend">
+      <span><span class="dot done"></span>已完成 31</span>
+      <span><span class="dot pending"></span>進行中 0</span>
+      <span><span class="dot info"></span>待辦 0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🗺️ P1 里程碑時間線（spec p1_spec.md v3）</h2>
+    <table>
+      <tr><th>里程碑</th><th>任務</th><th>狀態</th></tr>
+      <tr><td>P0-1 認證 + RBAC（雙角色登入 / 路由守衛）</td><td>#1–#5</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-1 模型層（freezed ×8 + regen）</td><td>#14</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-2 儲存層（Hive+AES-GCM 加密盒 ×5 / 軟刪 / 審計）</td><td>#6</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-3 匯入嚮導（JSON 優先 + 內置種子）</td><td>#11</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-4 專家儀表板（data-driven 卡 + 圖 + 歷史 + 媒體樁）</td><td>#8 #17–#21</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-5 通知骨架（本機）</td><td>#7</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-6 審計查看頁</td><td>#16</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-7 安全鎖（前台重驗）</td><td>#13</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-8 長者模式（自動 + 手動 + 可調）</td><td>#10</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-9 角色感知雙主題</td><td>#9</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-10 接線（router / dashboard / main）</td><td>#12</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1-11 l10n 補鍵 + build_runner + analyze 自檢</td><td>#15</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>工程基建（架構體檢 / 冒煙測試 / Provider 遷移）</td><td>#22 #26 #27</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>P1 驗收回歸（spec §16 自動化部分 + 真機清單）</td><td>#28</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>擴展 widget 測試（登入流程 / dashboard 主從 / 下鑽）</td><td>#29</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>雙端平台殼 + Web 可運行（flutter build web 通過 + 雙端降級）</td><td>#30</td><td><span class="pill done">已完成</span></td></tr>
+      <tr><td>雙端真機/瀏覽器驗收（Android apk 58.4MB / iOS CI / Web 離線重開步驟）</td><td>#31</td><td><span class="pill done">已完成</span></td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>🧩 功能盤點</h2>
+      <div class="kv">
+        <div><b>身份</b>：雙角色登入（<span class="tag-doc">醫生藍</span> / <span class="tag-pat">患者青綠</span>）+ RBAC 路由守衛 + 啟動會話還原</div>
+        <div><b>模型</b>：freezed ×8（Patient/PatientProfile/Metric/RehabSnapshot/TrendPoint/MediaAsset/ImportBatch/AuditEntry）</div>
+        <div><b>儲存</b>：Hive + AES-GCM at-rest 加密盒 ×5、DeletionService 軟刪、AuditStore 審計</div>
+        <div><b>匯入</b>：JSON 嚮導 + 一鍵載入 Demo 種子</div>
+        <div><b>儀表板</b>：依 Metric.kind 自動選圖（gauge / bar / radar / line）、歷次測試對比、媒體樁</div>
+        <div><b>安全</b>：前台切回逾時上鎖（local_auth 生物辨識 + 密碼兜底）</div>
+        <div><b>無障礙</b>：長者模式（系統大字自動 / 手動覆蓋 / 字號 1–2× / 高對比 / 簡化導航）</div>
+        <div><b>主題</b>：角色 seed × 明暗兩檔，ThemeExtension&lt;RoleTheme&gt; 型別安全強調色</div>
+        <div><b>i18n</b>：三語 l10n（zh_HK 模板 / en / zh）</div>
+        <div><b>📱 雙端</b>：平台殼 web / android / ios 已生成；<b>flutter build web 通過</b>（42M）+ <b>flutter build apk 通過</b>（58.4MB）；iOS 走 CI（.github/workflows/ci.yml）；local_auth / 本機通知 Web 降級（見 <a href="cross_platform_matrix.md" style="color:var(--info)">雙端矩陣</a>）</div>
+        <div><b>🧪 Web 離線重開</b>：三層證據鏈——L1 應用層語義（test/offline_reopen_semantic_test，已過 ✅）+ L2 瀏覽器 IndexedDB 跨會話（verify_idb.js 探針，已過 ✅）+ L3 App 行為層（需真實瀏覽器手驗，見 <a href="web_browser_verification_guide.md" style="color:var(--info)">手驗指南</a> + <code>webverify/verify_web_browser.bat</code>）</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📐 工程指標</h2>
+      <div class="kv">
+        <div><b>代碼量</b>：79 dart 文件 / 約 8.4k LOC（含生成），手寫約 4.5k</div>
+        <div><b>靜態檢查</b>：flutter analyze 0 issue（very_good_analysis）</div>
+        <div><b>測試</b>：22 測試全綠（providers 單測 + 冒煙 + P1 驗收回歸 + 登入/dashboard widget 流程 + 離線重開語義）</div>
+        <div><b>架構</b>：core → data → features → app 分層；跨 feature 導入為 0；無上帝元件</div>
+        <div><b>技術棧</b>：Flutter 3.44.8 / Dart 3.12.2 · Riverpod 2.6.1 · go_router · freezed · fl_chart 0.68 · Hive · local_auth</div>
+        <div><b>測試</b>：flutter_test + mocktail（dev deps 就緒）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✅ 驗收清單（spec §16）</h2>
+    <table>
+      <tr><th>驗收項</th><th>實現</th><th>自動化驗證</th><th>真機待驗</th></tr>
+      <tr><td>匯入樣例 JSON → 患者入列表</td><td>P1-3 / P1-4</td><td><span class="pill done">已回歸</span></td><td>—</td></tr>
+      <tr><td>看板 data-driven 概覽 + 縱向趨勢</td><td>P1-4</td><td><span class="pill done">已回歸</span></td><td>—</td></tr>
+      <tr><td>離線重開仍在（Hive 持久化）</td><td>P1-2</td><td><span class="pill done">已回歸</span></td><td>—</td></tr>
+      <tr><td>刪除軟刪可查審計</td><td>P1-2 / P1-6</td><td><span class="pill done">已回歸</span></td><td>—</td></tr>
+      <tr><td>前台切回需生物鎖</td><td>P1-7</td><td><span class="pill done">單測過</span></td><td><span class="pill warn">生物辨識</span></td></tr>
+      <tr><td>長者模式字號 / 對比變化</td><td>P1-8</td><td><span class="pill done">已斷言</span></td><td><span class="pill warn">視覺</span></td></tr>
+      <tr><td>本機通知到達</td><td>P1-5</td><td>—</td><td><span class="pill warn">需真機</span></td></tr>
+    </table>
+    <p class="muted" style="margin-top:10px;font-size:12.5px;">💡 驗收回歸抓出並修復 3 個真實運行時 bug：① freezed 嵌套 toJson 未遞迴（explicitToJson）；② Hive 盒型別 Map&lt;String,dynamic&gt; 重開強轉崩；③ 深層嵌套 Map&lt;dynamic,dynamic&gt; 強轉崩（JSON 往返修復）。</p>
+  </div>
+
+  <div class="card">
+    <h2>🚀 下一步建議</h2>
+    <div class="kv">
+      <div>1. <b>真機 / 瀏覽器最終驗收</b>：Android 設備安裝 app-release.apk 過 `docs/acceptance_device_checklist.md`（生物鎖 / 通知 / 選檔 / 視覺）；瀏覽器按矩陣 §8 驗 Web 離線重開（IndexedDB）</div>
+      <div>2. <b>P2 階段</b>：患者上傳 / 媒體模糊（media_blur，P1 已留樁）/ 醫患溝通；長者年齡≥65 規則隨 PII 接線一併落地</div>
+      <div>3. <b>工程化</b>：git init + 推送 GitHub 啟用 CI（analyze/test + web + android + ios 四 job）；iOS 上架前配置 release keystore</div>
+    </div>
+  </div>
+
+  <footer>由開發會話自動生成 · 更新時間 2026-08-18 20:50 · 資料來源：任務板 + dart analyze / flutter test / build web / build apk + p1_spec.md</footer>
+</div>
+</body>
+</html>

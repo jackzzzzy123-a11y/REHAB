@@ -1,0 +1,286 @@
+{
+  "@@locale": "en",
+  "appTitle": "RehabMed",
+  "@appTitle": {
+    "description": "App title"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button / page title"
+  },
+  "patientDashboard": "Patient Dashboard",
+  "@patientDashboard": {
+    "description": "Patient dashboard page title"
+  },
+  "ehrDetail": "EHR Detail",
+  "@ehrDetail": {
+    "description": "EHR detail page title"
+  },
+  "dataViz": "Trends",
+  "@dataViz": {
+    "description": "Data visualization page title"
+  },
+  "communication": "Communication",
+  "@communication": {
+    "description": "Communication page title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title"
+  },
+  "onlyForReference": "For reference only, not a substitute for in-person consultation",
+  "@onlyForReference": {
+    "description": "Auxiliary tool disclaimer"
+  },
+  "selectRole": "Select role",
+  "@selectRole": {
+    "description": "Login role selection hint"
+  },
+  "roleDoctor": "Doctor",
+  "@roleDoctor": {
+    "description": "Role: doctor"
+  },
+  "rolePatient": "Patient / Family",
+  "@rolePatient": {
+    "description": "Role: patient or family"
+  },
+  "username": "Account",
+  "@username": {
+    "description": "Account field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "biometricLogin": "Sign in with biometrics",
+  "@biometricLogin": {
+    "description": "Biometric login button"
+  },
+  "consentText": "I have read and accept the Personal Data Collection Statement (under Hong Kong's PDPO)",
+  "@consentText": {
+    "description": "PDPO personal data collection consent"
+  },
+  "consentRequired": "Please accept the personal data collection statement",
+  "@consentRequired": {
+    "description": "Hint when consent not ticked"
+  },
+  "patientHomeTitle": "My Rehab",
+  "@patientHomeTitle": {
+    "description": "Patient home title"
+  },
+  "searchPatients": "Search name / bed / stage",
+  "@searchPatients": {
+    "description": "Patient search hint"
+  },
+  "noPatients": "No patient records",
+  "@noPatients": {
+    "description": "Empty list hint"
+  },
+  "logout": "Log out",
+  "@logout": {
+    "description": "Log out button"
+  },
+  "myStage": "Rehab stage",
+  "@myStage": {
+    "description": "Patient's own rehab stage"
+  },
+  "nextAppointment": "Next appointment",
+  "@nextAppointment": {
+    "description": "Next appointment time"
+  },
+  "myProgress": "My progress",
+  "@myProgress": {
+    "description": "Rehab progress"
+  },
+  "contactDoctor": "Contact doctor",
+  "@contactDoctor": {
+    "description": "Contact doctor button"
+  },
+  "viewRecords": "View my records",
+  "@viewRecords": {
+    "description": "View own records button"
+  },
+  "detailPlaceholder": "Case detail (in progress)",
+  "@detailPlaceholder": {
+    "description": "Detail page placeholder"
+  },
+  "bedNo": "Bed no.",
+  "@bedNo": {
+    "description": "Bed number label"
+  },
+  "importTitle": "Import rehab data",
+  "@importTitle": {
+    "description": "Import page title"
+  },
+  "importEntry": "Import data",
+  "@importEntry": {
+    "description": "Dashboard import button"
+  },
+  "pickFile": "Select file",
+  "@pickFile": {
+    "description": "Import pick-file button"
+  },
+  "importHint": "Supports JSON / CSV analyzed rehab data files",
+  "@importHint": {
+    "description": "Import page format hint"
+  },
+  "importing": "Importing…",
+  "@importing": {
+    "description": "Import in progress"
+  },
+  "stepSelectFile": "Select file",
+  "@stepSelectFile": {
+    "description": "Step: select file"
+  },
+  "stepParse": "Parsing",
+  "@stepParse": {
+    "description": "Step: parse"
+  },
+  "stepValidate": "Validating",
+  "@stepValidate": {
+    "description": "Step: validate"
+  },
+  "stepSave": "Saving locally",
+  "@stepSave": {
+    "description": "Step: save locally"
+  },
+  "importSuccess": "Import successful",
+  "@importSuccess": {
+    "description": "Import success title"
+  },
+  "importPatient": "Patient: {name}",
+  "@importPatient": {
+    "description": "Import success patient name",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importRecordCount": "Imported {count} rehab records",
+  "@importRecordCount": {
+    "description": "Import success record count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "importFailed": "Import failed",
+  "@importFailed": {
+    "description": "Import failed title"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button"
+  },
+  "backToOverview": "Back to overview",
+  "@backToOverview": {
+    "description": "Import done back to overview"
+  },
+  "analyticsNoData": "No data",
+  "@analyticsNoData": { "description": "Analytics panel empty hint" },
+  "degradeNote": "No summary provided; showing latest batch metrics",
+  "@degradeNote": { "description": "Degraded hint when no summary" },
+  "completionRateLabel": "Completion rate",
+  "@completionRateLabel": { "description": "Overview completion rate label" },
+  "riskLabel": "Risk",
+  "@riskLabel": { "description": "Risk level label" },
+  "trendTitle": "Trend",
+  "@trendTitle": { "description": "Longitudinal trend title" },
+  "trendUp": "Improving",
+  "@trendUp": { "description": "Trend up" },
+  "trendDown": "Worsening",
+  "@trendDown": { "description": "Trend down" },
+  "trendFlat": "Stable",
+  "@trendFlat": { "description": "Trend flat" },
+  "noteLabel": "Note",
+  "@noteLabel": { "description": "Overview note label" },
+  "analyticsNoSummaryHint": "App does not compute metrics; only visualizes external analysis",
+  "@analyticsNoSummaryHint": { "description": "No-compute principle hint" },
+  "distributionTitle": "Distribution",
+  "@distributionTitle": { "description": "Distribution bar title" },
+  "historyTitle": "History",
+  "@historyTitle": { "description": "History title" },
+  "mediaTitle": "Media",
+  "@mediaTitle": { "description": "Media title" },
+  "analyticsNoTrend": "No plottable trend metrics",
+  "@analyticsNoTrend": { "description": "No trend metrics hint" },
+  "selectMetric": "Select metric",
+  "@selectMetric": { "description": "Trend metric picker hint" },
+  "radarTitle": "Capability radar",
+  "@radarTitle": { "description": "Radar chart title" },
+  "batchLabel": "Batch",
+  "@batchLabel": { "description": "Batch label" },
+  "testDateLabel": "Assessment date",
+  "@testDateLabel": { "description": "Assessment date label" },
+  "metricsCount": "Metrics",
+  "@metricsCount": { "description": "Metric count label" },
+  "compareTitle": "Batch comparison",
+  "@compareTitle": { "description": "Batch comparison title" },
+  "metricLabel": "Metric",
+  "@metricLabel": { "description": "Metric name column" },
+  "deltaLabel": "Δ",
+  "@deltaLabel": { "description": "Comparison delta column" },
+  "latestBadge": "Latest",
+  "@latestBadge": { "description": "Latest batch badge" },
+  "noCompareData": "No comparable data",
+  "@noCompareData": { "description": "No comparable data hint" },
+  "noMedia": "No auxiliary media (P2)",
+  "@noMedia": { "description": "Media stub hint" },
+  "seedOrImportHint": "Import analyzed files or load built-in sample data to preview the dashboard",
+  "@seedOrImportHint": { "description": "Empty list guidance" },
+  "loadDemo": "Load sample",
+  "@loadDemo": { "description": "Load demo seed button" },
+  "themeTitle": "Theme",
+  "@themeTitle": { "description": "Settings page theme section title" },
+  "themeSubtitle": "Light & dark mode",
+  "@themeSubtitle": { "description": "Settings page theme section subtitle" },
+  "themeModeLight": "Light",
+  "@themeModeLight": { "description": "Theme mode: light" },
+  "themeModeDark": "Dark",
+  "@themeModeDark": { "description": "Theme mode: dark" },
+  "themeModeSystem": "System",
+  "@themeModeSystem": { "description": "Theme mode: follow system" },
+  "elderTitle": "Elder mode",
+  "@elderTitle": { "description": "Settings page elder mode title" },
+  "elderSubtitle": "Auto + manual + adjustable",
+  "@elderSubtitle": { "description": "Elder mode subtitle" },
+  "elderAutoHint": "Auto: enabled when system text is large (age-65 rule wired in P2)",
+  "@elderAutoHint": { "description": "Elder mode auto-detection hint" },
+  "elderResetAuto": "Reset to auto",
+  "@elderResetAuto": { "description": "Elder mode reset button" },
+  "elderScaleLabel": "Text scale",
+  "@elderScaleLabel": { "description": "Text scale slider label" },
+  "elderContrastLabel": "High contrast",
+  "@elderContrastLabel": { "description": "High contrast switch" },
+  "elderSimplifyLabel": "Simplified navigation",
+  "@elderSimplifyLabel": { "description": "Simplified navigation switch" },
+  "lockTitle": "Security lock",
+  "@lockTitle": { "description": "Settings page security lock title" },
+  "lockSubtitle": "Re-verify on foreground return (biometric)",
+  "@lockSubtitle": { "description": "Security lock subtitle" },
+  "lockEnableLabel": "Enable security lock",
+  "@lockEnableLabel": { "description": "Enable security lock switch" },
+  "lockTimeoutLabel": "Lock timeout",
+  "@lockTimeoutLabel": { "description": "Lock timeout label" },
+  "lockTimeoutMin1": "1 min",
+  "@lockTimeoutMin1": { "description": "Lock timeout: 1 minute" },
+  "lockTimeoutMin3": "3 min",
+  "@lockTimeoutMin3": { "description": "Lock timeout: 3 minutes" },
+  "lockTimeoutMin5": "5 min",
+  "@lockTimeoutMin5": { "description": "Lock timeout: 5 minutes" },
+  "lockTimeoutMin10": "10 min",
+  "@lockTimeoutMin10": { "description": "Lock timeout: 10 minutes" },
+  "lockScreenTitle": "App locked",
+  "@lockScreenTitle": { "description": "Lock screen title" },
+  "lockScreenHint": "Verify your identity to continue",
+  "@lockScreenHint": { "description": "Lock screen hint" },
+  "unlockButton": "Unlock",
+  "@unlockButton": { "description": "Unlock button" },
+  "unlockPasswordLabel": "Password",
+  "@unlockPasswordLabel": { "description": "Unlock password field label" },
+  "unlockPasswordHint": "Biometric unavailable — enter password (at least 6 chars)",
+  "@unlockPasswordHint": { "description": "Unlock password fallback hint" }
+}

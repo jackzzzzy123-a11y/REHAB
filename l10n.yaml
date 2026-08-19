@@ -1,0 +1,10 @@
+# 本地化設定（flutter gen-l10n 讀取）。
+# template 以繁體中文（香港）為準，英文為輔。
+# 註：Flutter 3.22+ 已移除 synthetic-package，改為顯式 output-dir，
+# app 以 `package:rehab_med/l10n/generated/app_localizations.dart` 匯入。
+
+arb-dir: lib/l10n
+template-arb-file: app_zh_HK.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+output-dir: lib/l10n/generated

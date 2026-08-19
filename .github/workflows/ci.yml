@@ -1,0 +1,91 @@
+# 三平台持续集成（CI）—— RehabMed
+# 目的：把「双端真机/浏览器验收」中无法在本机环境自动化完成的平台构建（Android apk / iOS）
+#      下沉到 CI 自动执行，任何人 push 即可获得三端构建产物 + 测试门禁。
+#
+# 使用前提：
+#   1. 项目已 git init 并推送至 GitHub（当前项目尚未 git 化，先 `git init` + 推送）。
+#   2. 本工作流开箱即用：release 构建使用 Flutter 模板自带的 debug signing，
+#      无需配置签名密钥即可产出可安装 apk；正式上架前再配置签名。
+#
+# 触发：push 到 main/master 或 PR。
+
+name: rehab-ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  # ── Job 1：静态检查 + 全量测试（最快门禁）─────────────────────────────
+  analyze-test:
+    name: Analyze + Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.44.8'
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+
+  # ── Job 2：Web 构建（产物可发布到任意静态托管 / CloudStudio / GitHub Pages）──
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.44.8'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build web --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rehab-web
+          path: build/web
+
+  # ── Job 3：Android Release APK ────────────────────────────────────────
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.44.8'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rehab-apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+  # ── Job 4：iOS（需 macOS runner；--no-codesign 无需证书即可验证编译）────
+  build-ios:
+    name: Build iOS (no codesign)
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.44.8'
+          cache: true
+      - run: flutter pub get
+      - run: flutter build ios --release --no-codesign
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rehab-ios
+          path: build/ios/iphoneos/*.app
