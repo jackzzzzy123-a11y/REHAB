@@ -65,9 +65,9 @@ void main() {
   group('VideoTrimmerEngine 契約（fake 注入）', () {
     test('trim 回傳 duration == end - start 且傳遞 request', () async {
       final fake = FakeTrimmerEngine(inputBytes: 100, outputBytes: 40);
-      final req = TrimRequest(
-        start: const Duration(seconds: 10),
-        end: const Duration(seconds: 30),
+      const req = TrimRequest(
+        start: Duration(seconds: 10),
+        end: Duration(seconds: 30),
       );
       final res = await fake.trim(req);
 

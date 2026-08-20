@@ -71,7 +71,11 @@ void main() {
     test('同名檔案重複 persist 覆寫而非失敗', () async {
       final src1 = File('${base.path}/v.mp4')..writeAsBytesSync([1, 1]);
       final src2 = File('${base.path}/v2.mp4')..writeAsBytesSync([2, 2, 2]);
-      await store.persist(patientId: 'P1', fileName: 'v.mp4', sourcePath: src1.path);
+      await store.persist(
+        patientId: 'P1',
+        fileName: 'v.mp4',
+        sourcePath: src1.path,
+      );
       final p2 = await store.persist(
         patientId: 'P1',
         fileName: 'v.mp4',
