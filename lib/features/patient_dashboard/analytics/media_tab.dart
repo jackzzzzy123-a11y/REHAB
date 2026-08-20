@@ -44,7 +44,7 @@ class MediaTab extends StatelessWidget {
   }
 }
 
-/// 合規說明條：影像存前模糊（PDPO / media_blur）；影片已獲同意保存（模糊暫緩）。
+/// 合規說明條：網頁版影片上傳前模糊面部（PDPO / 隱私）；其餘平臺影片以患者同意保存。
 class _ComplianceNote extends StatelessWidget {
   const _ComplianceNote();
 
@@ -68,9 +68,9 @@ class _ComplianceNote extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '影像已於儲存前模糊背景與面部（media_blur）；'
-              '影片已獲患者同意保存，用於康復記錄用途。'
-              '本機靜態存放（PDPO 第4原則）。',
+              '網頁版影片已於上傳前模糊面部以保護個資；'
+              '行動端影片以患者同意保存，用於康復記錄用途。'
+              '本機靜態加密存放（PDPO 第4原則）。',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),

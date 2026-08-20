@@ -4,10 +4,11 @@
 // 流程：選檔後進入 → 預覽（video_player）→ 拖動起止（RangeSlider）
 //      → 導出（引擎分派：移動端 video_trimmer / Web ffmpeg_wasm）
 //      → 以 TrimResult 回傳給上傳流程。
-// 合規：僅剪輯，不做模糊（視頻模糊暫緩，見 p1_spec §12 討論）。
+// 合規：網頁版可於導出時選擇模糊面部（保護個資）；行動端模糊暫緩（B 決策）。
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -41,6 +42,9 @@ class _TrimPageState extends State<TrimPage> {
   bool _ready = false;
   bool _busy = false;
   String? _error;
+
+  /// 是否模糊面部（僅網頁版生效；預設開啟以保護個資）。
+  bool _blurFace = true;
 
   @override
   void initState() {
@@ -82,8 +86,9 @@ class _TrimPageState extends State<TrimPage> {
       _error = null;
     });
     try {
-      final result = await _engine.trim(
+      final result = await _engine.trimAndBlur(
         TrimRequest(start: _start, end: _end),
+        blurFace: _blurFace,
       );
       if (!mounted) return;
       Navigator.of(context).pop(result);
@@ -196,6 +201,21 @@ class _TrimPageState extends State<TrimPage> {
               ),
             ),
           ),
+          if (kIsWeb) ...[
+            const SizedBox(height: 16),
+            Card(
+              child: SwitchListTile(
+                value: _blurFace,
+                onChanged: _busy
+                    ? null
+                    : (v) => setState(() => _blurFace = v),
+                title: const Text('模糊面部（保護個資）'),
+                subtitle: const Text('上傳前對畫面上方臉部區域做像素化，'
+                    '保留身體動作供臨床檢視。預設開啟。'),
+                secondary: const Icon(Icons.face_retouching_off),
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           if (_error != null) ...[
             Text(_error!, style: const TextStyle(color: Colors.red)),

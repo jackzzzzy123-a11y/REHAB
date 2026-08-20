@@ -24,6 +24,8 @@ class TrimResult {
     required this.duration,
     required this.inputBytes,
     required this.outputBytes,
+    this.faceBlurred = false,
+    this.backgroundBlurred = false,
   });
 
   /// 移動端：裁剪後檔案真實路徑；Web：空（已觸發瀏覽器下載）。
@@ -37,6 +39,12 @@ class TrimResult {
 
   /// 裁剪後大小（bytes）。
   final int outputBytes;
+
+  /// 是否對面部區域做了真實模糊（用於合規標記，必須與實際處理一致）。
+  final bool faceBlurred;
+
+  /// 是否對背景做了真實模糊。
+  final bool backgroundBlurred;
 }
 
 /// 剪輯引擎抽象。
@@ -49,6 +57,25 @@ abstract class VideoTrimmerEngine {
 
   /// 依 [request] 裁剪並匯出。
   Future<TrimResult> trim(TrimRequest request);
+
+  /// 裁剪並（視平臺）模糊面部。
+  ///
+  /// [blurFace] 為 true 時要求對面部區域做真實像素化；平臺不支援時
+  /// （Android/iOS 目前暫緩，見 B 決策）僅裁剪並回傳未模糊標記，
+  /// 由上層如實標記（絕不謊報已模糊）。
+  /// 預設實作等同 [trim] 並回傳 `faceBlurred=false`，子類可覆寫。
+  Future<TrimResult> trimAndBlur(
+    TrimRequest request, {
+    required bool blurFace,
+  }) async {
+    final r = await trim(request);
+    return TrimResult(
+      outputPath: r.outputPath,
+      duration: r.duration,
+      inputBytes: r.inputBytes,
+      outputBytes: r.outputBytes,
+    );
+  }
 
   /// 釋放資源（播放器 / wasm 實例）。
   void dispose();

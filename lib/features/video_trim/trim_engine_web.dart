@@ -12,6 +12,7 @@ import 'dart:typed_data';
 
 import 'package:ffmpeg_wasm/ffmpeg_wasm.dart';
 
+import 'blur_filter_graph.dart';
 import 'ffmpeg_time_format.dart';
 import 'video_trimmer_engine.dart';
 
@@ -112,6 +113,59 @@ class WebTrimmerEngine implements VideoTrimmerEngine {
       ..click();
     html.Url.revokeObjectUrl(url);
     anchor.remove();
+  }
+
+  @override
+  Future<TrimResult> trimAndBlur(
+    TrimRequest request, {
+    required bool blurFace,
+  }) async {
+    final ff = await _ensureLoaded();
+    ff.writeFile(_inputName, _bytes);
+
+    late final Uint8List output;
+    late final bool faceBlurred;
+    late final bool backgroundBlurred;
+
+    if (!blurFace) {
+      // 純裁剪（stream copy，快速去頭尾，不做模糊）。
+      await ff.run([
+        '-i', _inputName,
+        '-ss', formatFFmpegTimestamp(request.start),
+        '-to', formatFFmpegTimestamp(request.end),
+        '-c', 'copy',
+        _outputName,
+      ]);
+      output = ff.readFile(_outputName);
+      faceBlurred = false;
+      backgroundBlurred = false;
+    } else {
+      // 裁剪 + 面部區域像素化（mpeg4 重新編碼）。
+      final args = buildFaceRegionBlurArgs(
+        inputName: _inputName,
+        outputName: _outputName,
+        start: request.start,
+        end: request.end,
+      );
+      await ff.run(args);
+      output = ff.readFile(_outputName);
+      faceBlurred = true;
+      backgroundBlurred = false;
+    }
+
+    _download(output, fileName);
+    // 清理 MEMFS，釋放記憶體。
+    ff
+      ..unlink(_inputName)
+      ..unlink(_outputName);
+    return TrimResult(
+      outputPath: '',
+      duration: request.end - request.start,
+      inputBytes: _bytes.length,
+      outputBytes: output.length,
+      faceBlurred: faceBlurred,
+      backgroundBlurred: backgroundBlurred,
+    );
   }
 
   @override

@@ -1,9 +1,10 @@
 // lib/features/patient_upload/patient_upload_page.dart
 //
-// 患者端上傳（P2-d + P3 升級）。
-// - 影片：選檔 → 剪輯（去掉頭尾，減體積）→ 真實持久化（移動端落盤 / Web 下載）→ 元數據入庫。
+// 患者端上傳（P2-d + P3 升級 + B 影片模糊）。
+// - 影片：選檔 → 剪輯（去掉頭尾，減體積）→（網頁版可選）模糊面部像素化
+//        → 真實持久化（移動端落盤 / Web 下載）→ 元數據入庫（如實標記模糊狀態）。
 // - 圖片：維持 P2-d 流程（元數據入庫，模糊標記）。
-// 合規：上傳前取得同意（PDPO 同意原則）；影片模糊暫緩（P3 決策），UI 如實標記。
+// 合規：上傳前取得同意（PDPO 同意原則）；行動端影片模糊暫緩（B 決策），UI 如實標記。
 // 依賴倒置：剪輯引擎 / 檔案存放服務皆為平台抽象，UI 不碰平台細節。
 
 import 'dart:typed_data';
@@ -86,9 +87,10 @@ class _PatientUploadPageState extends ConsumerState<PatientUploadPage> {
       kind: MediaKind.video,
       storagePath: storagePath,
       capturedAt: DateTime.now(),
-      // 影片模糊暫緩（P3 決策）：如實標記未模糊。
-      backgroundBlurred: false,
-      faceBlurred: false,
+      // 如實標記：Web 導出時若開啟模糊面部則 faceBlurred=true；
+      // 行動端目前暫緩模糊（B 決策），引擎回傳 false，絕不謊報。
+      backgroundBlurred: result.backgroundBlurred,
+      faceBlurred: result.faceBlurred,
     );
     await repo.saveMedia(asset);
     if (mounted) {

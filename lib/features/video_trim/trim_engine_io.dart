@@ -12,7 +12,8 @@ import 'package:video_trimmer/video_trimmer.dart';
 import 'video_trimmer_engine.dart';
 
 /// 移動端剪輯引擎（video_trimmer）。
-class NativeTrimmerEngine implements VideoTrimmerEngine {
+/// extends 以繼承預設 trimAndBlur（行動端暫緩模糊，回傳未模糊標記）。
+class NativeTrimmerEngine extends VideoTrimmerEngine {
   NativeTrimmerEngine({required String filePath}) : _file = File(filePath);
 
   final File _file;

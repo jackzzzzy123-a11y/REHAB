@@ -80,10 +80,43 @@ void main() {
       expect(res.outputPath, 'fake_out');
     });
   });
+
+  group('VideoTrimmerEngine.trimAndBlur 契約', () {
+    test('預設實作（不支援模糊）回傳未模糊標記且不變 duration', () async {
+      final fake = FakeTrimmerEngine(inputBytes: 100, outputBytes: 40);
+      const req = TrimRequest(
+        start: Duration(seconds: 10),
+        end: Duration(seconds: 30),
+      );
+      final res = await fake.trimAndBlur(req, blurFace: true);
+
+      expect(res.duration, const Duration(seconds: 20));
+      expect(res.faceBlurred, isFalse);
+      expect(res.backgroundBlurred, isFalse);
+    });
+
+    test('支援模糊的引擎：blurFace 傳遞與標記一致', () async {
+      final blur = BlurAwareFake(inputBytes: 100, outputBytes: 40);
+      const req = TrimRequest(
+        start: Duration(seconds: 10),
+        end: Duration(seconds: 30),
+      );
+
+      final blurred = await blur.trimAndBlur(req, blurFace: true);
+      expect(blur.lastBlurFace, isTrue);
+      expect(blurred.faceBlurred, isTrue);
+      expect(blurred.backgroundBlurred, isFalse);
+
+      final plain = await blur.trimAndBlur(req, blurFace: false);
+      expect(blur.lastBlurFace, isFalse);
+      expect(plain.faceBlurred, isFalse);
+    });
+  });
 }
 
 /// 測試用假引擎：記錄 request 並依不變式產生 TrimResult。
-class FakeTrimmerEngine implements VideoTrimmerEngine {
+/// extends 以繼承預設 trimAndBlur（回傳未模糊標記）。
+class FakeTrimmerEngine extends VideoTrimmerEngine {
   FakeTrimmerEngine({this.inputBytes = 0, this.outputBytes = 0});
 
   @override
@@ -102,6 +135,45 @@ class FakeTrimmerEngine implements VideoTrimmerEngine {
       duration: request.end - request.start,
       inputBytes: inputBytes,
       outputBytes: outputBytes,
+    );
+  }
+
+  @override
+  void dispose() {}
+}
+
+/// 支援模糊的假引擎：記錄 blurFace 並依其回傳標記。
+class BlurAwareFake implements VideoTrimmerEngine {
+  BlurAwareFake({this.inputBytes = 0, this.outputBytes = 0});
+
+  @override
+  final int inputBytes;
+  final int outputBytes;
+  bool? lastBlurFace;
+
+  @override
+  Future<Duration> probeDuration() async => const Duration(seconds: 60);
+
+  @override
+  Future<TrimResult> trim(TrimRequest request) async => TrimResult(
+        outputPath: 'fake_out',
+        duration: request.end - request.start,
+        inputBytes: inputBytes,
+        outputBytes: outputBytes,
+      );
+
+  @override
+  Future<TrimResult> trimAndBlur(
+    TrimRequest request, {
+    required bool blurFace,
+  }) async {
+    lastBlurFace = blurFace;
+    return TrimResult(
+      outputPath: 'fake_out',
+      duration: request.end - request.start,
+      inputBytes: inputBytes,
+      outputBytes: outputBytes,
+      faceBlurred: blurFace,
     );
   }
 
