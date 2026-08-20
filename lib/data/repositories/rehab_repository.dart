@@ -21,12 +21,16 @@ class RehabRepository {
     required this.deletion,
     required this.auditStore,
     required this.currentExpertId,
-  });
+    MediaFileStore? mediaFileStore,
+  }) : _mediaFileStore = mediaFileStore ?? createMediaFileStore();
   final LocalStorageService storage;
   final RehabDataSource dataSource;
   final DeletionService deletion;
   final AuditStore auditStore;
   final String currentExpertId;
+
+  /// 媒體檔案存放服務（可依賴注入，便於測試；預設依平台建立）。
+  final MediaFileStore _mediaFileStore;
 
   // ---- 讀取（專家端）----
   Future<List<PatientProfile>> getActivePatients() =>
@@ -69,7 +73,7 @@ class RehabRepository {
     required String fileName,
     required String sourcePath,
   }) {
-    return createMediaFileStore().persist(
+    return _mediaFileStore.persist(
       patientId: patientId,
       fileName: fileName,
       sourcePath: sourcePath,

@@ -10,15 +10,23 @@ import 'package:path_provider/path_provider.dart';
 import 'media_file_store.dart';
 
 /// 移動端媒體檔案存放。
+///
+/// [baseDirectory] 允許測試注入臨時目錄；生產環境不傳，預設使用
+/// `getApplicationDocumentsDirectory()`。
 class MediaFileStoreIo implements MediaFileStore {
+  const MediaFileStoreIo({this.baseDirectory});
+
+  /// 媒體根目錄覆寫（測試用）。為 null 時回退到 App 文件目錄。
+  final Directory? baseDirectory;
+
   @override
   Future<String?> persist({
     required String patientId,
     required String fileName,
     required String sourcePath,
   }) async {
-    final documents = await getApplicationDocumentsDirectory();
-    final targetDir = Directory('${documents.path}/media/$patientId');
+    final base = baseDirectory ?? await getApplicationDocumentsDirectory();
+    final targetDir = Directory('${base.path}/media/$patientId');
     await targetDir.create(recursive: true);
     final targetPath = '${targetDir.path}/$fileName';
     await File(sourcePath).copy(targetPath);
@@ -27,4 +35,4 @@ class MediaFileStoreIo implements MediaFileStore {
 }
 
 /// 平台建立工廠（非 web 分支）。
-MediaFileStore createMediaFileStoreImpl() => MediaFileStoreIo();
+MediaFileStore createMediaFileStoreImpl() => const MediaFileStoreIo();

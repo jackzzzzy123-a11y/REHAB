@@ -12,6 +12,7 @@ import 'dart:typed_data';
 
 import 'package:ffmpeg_wasm/ffmpeg_wasm.dart';
 
+import 'ffmpeg_time_format.dart';
 import 'video_trimmer_engine.dart';
 
 /// Web 端剪輯引擎（ffmpeg.wasm）。
@@ -69,8 +70,8 @@ class WebTrimmerEngine implements VideoTrimmerEngine {
     ff.writeFile(_inputName, _bytes);
     await ff.run([
       '-i', _inputName,
-      '-ss', _format(request.start),
-      '-to', _format(request.end),
+      '-ss', formatFFmpegTimestamp(request.start),
+      '-to', formatFFmpegTimestamp(request.end),
       '-c', 'copy',
       _outputName,
     ]);
@@ -101,13 +102,6 @@ class WebTrimmerEngine implements VideoTrimmerEngine {
     await ff.load();
     _ffmpeg = ff;
     return ff;
-  }
-
-  static String _format(Duration d) {
-    String two(int v) => v.toString().padLeft(2, '0');
-    final millis = (d.inMilliseconds % 1000).toString().padLeft(3, '0');
-    return '${two(d.inHours)}:${two(d.inMinutes)}:'
-        '${two(d.inSeconds)}.$millis';
   }
 
   void _download(Uint8List bytes, String name) {
